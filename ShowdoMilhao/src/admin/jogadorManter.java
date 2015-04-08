@@ -6,6 +6,7 @@
 
 package admin;
 
+import dao.JogadorDao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -421,9 +422,22 @@ public class jogadorManter extends javax.swing.JFrame {
             obj.setSenha(txtSenha.getText());
             obj.setEmail(txtEmail.getText());
             obj.setId(Integer.parseInt(txtID.getText()));
+            
+            JogadorDao dao = new JogadorDao();
+            boolean deucerto = dao.inserir(obj);
+            if(deucerto == true)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Cadastrado com sucesso!");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar");
+            }    
+            
             lista.add(obj);
             Limpar();
             JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!");
+            
         }
     }//GEN-LAST:event_botaoInserirActionPerformed
 
