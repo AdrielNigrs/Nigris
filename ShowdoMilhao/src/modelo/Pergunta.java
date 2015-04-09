@@ -1,7 +1,7 @@
 package modelo;
 
 public class Pergunta {
-    private String a, b, c, d, certa, pergunta;
+    private String a, b, c, d, certa, enunciado;
     private Integer nivel, id;
 
     public Integer getId() {
@@ -12,12 +12,12 @@ public class Pergunta {
         this.id = id;
     }
 
-    public String getPergunta() {
-        return pergunta;
+    public String getEnunciado() {
+        return enunciado;
     }
 
-    public void setPergunta(String enunciado) {
-        this.pergunta = enunciado;
+    public void setEnunciado(String enunciado) {
+        this.enunciado = enunciado;
     }
 
     public String getA() {

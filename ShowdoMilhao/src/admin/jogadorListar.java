@@ -5,6 +5,7 @@
  */
 package admin;
 
+import dao.JogadorDao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -21,23 +22,9 @@ public class jogadorListar extends javax.swing.JFrame {
      */
     public jogadorListar() {
         initComponents();
-        List<Jogador> lista = new ArrayList<Jogador>();
-
-        Jogador j = new Jogador();
-        j.setLogin("Adriel Nigris");
-        j.setEmail("adrielnigris@live.com");
-        lista.add(j);
-
-        j = new Jogador();
-        j.setLogin("Andressa");
-        j.setEmail("andressa@hotmail.com");
-        lista.add(j);
+        JogadorDao dao = new JogadorDao();
+        List<Jogador> lista = dao.listar();
         
-        j = new Jogador();
-        j.setLogin("Mari");
-        j.setEmail("Mari@outlook.com");
-        lista.add(j);
-
         DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
         
         Object[] linha = new Object[modelo.getColumnCount()];
@@ -48,6 +35,7 @@ public class jogadorListar extends javax.swing.JFrame {
             modelo.addRow(linha);
         }  
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

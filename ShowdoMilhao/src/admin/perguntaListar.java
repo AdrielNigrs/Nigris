@@ -5,6 +5,7 @@
  */
 package admin;
 
+import dao.PerguntaDao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -21,10 +22,13 @@ public class perguntaListar extends javax.swing.JFrame {
      */
     public perguntaListar() {
         initComponents();
-        List<Pergunta> lista = new ArrayList<Pergunta>();
+        PerguntaDao dao = new PerguntaDao();
+        
+        List<Pergunta> lista = dao.listar();
 
-        Pergunta p = new Pergunta();
-        p.setPergunta("Quanto é 17 + 3?");
+        
+        /*Pergunta p = new Pergunta();
+        p.setEnunciado("Quanto é 17 + 3?");
         p.setA("20");
         p.setB("38");
         p.setC("107");
@@ -34,7 +38,7 @@ public class perguntaListar extends javax.swing.JFrame {
         lista.add(p);
 
         p = new Pergunta();
-        p.setPergunta("Qual é a forma de uma caixa?");
+        p.setEnunciado("Qual é a forma de uma caixa?");
         p.setA("Quadrado");
         p.setB("Retângulo");
         p.setC("Círculo");
@@ -44,21 +48,21 @@ public class perguntaListar extends javax.swing.JFrame {
         lista.add(p);
         
         p = new Pergunta();
-        p.setPergunta("De que cor é o sangue?");
+        p.setEnunciado("De que cor é o sangue?");
         p.setA("Rosa");
         p.setB("Preto");
         p.setC("Roxo");
         p.setD("Vermelho");
         p.setCerta("D");
         p.setNivel(4);
-        lista.add(p);
+        lista.add(p); */
 
         DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
         
         Object[] linha = new Object[modelo.getColumnCount()];
 
         for (Pergunta per : lista) {
-            linha[0] = per.getPergunta();
+            linha[0] = per.getEnunciado();
             linha[1] = per.getA();
             linha[2] = per.getB();
             linha[3] = per.getC();

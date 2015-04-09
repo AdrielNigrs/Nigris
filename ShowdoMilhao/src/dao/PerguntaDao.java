@@ -19,20 +19,20 @@ import modelo.Pergunta;
  * @author Adriel
  */
 public class PerguntaDao {
-     public Boolean Pergunta(Pergunta pergunta) throws SQLException{
+     public Boolean Inserir(Pergunta pergunta){
         Boolean retorno;
         
-        String sql = "INSERT INTO Usuario(nome, senha, email)" + "VALUES (?,?,?)";
+        String sql = "INSERT INTO Pergunta(a,b,c,d,certa,enunciado,nivel)" + "VALUES (?,?,?,?,?,?,?)";
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try
         {
-        pst.setString(1, pergunta.getPergunta());
-        pst.setString(2, pergunta.getA());
-        pst.setString(3, pergunta.getB());
-        pst.setString(4, pergunta.getC());
-        pst.setString(5, pergunta.getD());
-        pst.setString(6, pergunta.getCerta());
-                
+        pst.setString(1, pergunta.getA());
+        pst.setString(2, pergunta.getB());
+        pst.setString(3, pergunta.getC());
+        pst.setString(4, pergunta.getD());
+        pst.setString(5, pergunta.getCerta());
+        pst.setString(6, pergunta.getEnunciado());
+        pst.setInt(7, pergunta.getNivel());
                 
                 
         pst.executeUpdate();
@@ -44,7 +44,7 @@ public class PerguntaDao {
             retorno = false;
         }
     return retorno;
-        
+    }   
      public List<Pergunta> listar()
     {
     List<Pergunta> lista = new ArrayList<Pergunta>();
@@ -57,12 +57,14 @@ public class PerguntaDao {
         while(res.next())
         {
             Pergunta pergunta = new Pergunta();
-            pergunta.setPergunta(res.getString(""));
-            pergunta.setA( res.getString(""));
-            pergunta.setB( res.getString(""));
-            pergunta.setC( res.getString(""));
-            pergunta.setD(res.getString(""));
-            pergunta.setCerta(res.getString(""));
+            pergunta.setEnunciado(res.getString("Enunciado"));
+            pergunta.setA( res.getString("A"));
+            pergunta.setB( res.getString("B"));
+            pergunta.setC( res.getString("C"));
+            pergunta.setD(res.getString("D"));
+            pergunta.setCerta(res.getString("Certa"));
+            pergunta.setNivel(res.getInt("Nivel"));
+            pergunta.setId(res.getInt("Id"));
             
             lista.add(pergunta);
             
@@ -76,4 +78,4 @@ public class PerguntaDao {
    
     
     }
-}
+
