@@ -11,23 +11,14 @@ package modelo;
  */
 public class Pessoa {
  
-    private String codigo;
+    private Integer codigo;
     private String nome;
     private String sexo;
 
     /**
      * @return the codigo
      */
-    public String getCodigo() {
-        return codigo;
-    }
-
-    /**
-     * @param codigo the codigo to set
-     */
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+   
 
     /**
      * @return the nome
@@ -55,5 +46,19 @@ public class Pessoa {
      */
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    /**
+     * @return the codigo
+     */
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 }

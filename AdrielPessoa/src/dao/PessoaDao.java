@@ -12,25 +12,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Jogador;
-
+import modelo.Pessoa;
 
 /**
  *
  * @author Adriel
  */
-public class JogadorDao {
-
-    public Boolean inserir(Jogador jogador)
+public class PessoaDao {
+       
+    public Boolean inserir(Pessoa pessoa)
     {
         Boolean retorno;
-        String sql = "INSERT INTO jogador(login,senha,email)" + "VALUES (?,?,?)";
+        String sql = "INSERT INTO pessoa(nome,sexo)" + "VALUES (?,?)";
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try
         {
-        pst.setString(1, jogador.getLogin());
-        pst.setString(2, jogador.getSenha());
-        pst.setString(3, jogador.getEmail());
+        pst.setString(1, pessoa.getNome());
+        pst.setString(2, pessoa.getSexo());
         
         pst.executeUpdate();
         retorno = true;
@@ -44,10 +42,10 @@ public class JogadorDao {
     }
 
 
-    public List<Jogador> listar()
+    public List<Pessoa> listar()
     {
-    List<Jogador> lista = new ArrayList<Jogador>();
-    String sql = "SELECT * FROM jogador";
+    List<Pessoa> lista = new ArrayList<Pessoa>();
+    String sql = "SELECT * FROM pessoa";
     PreparedStatement pst = Conexao.getPreparedStatement(sql);
     
     try{
@@ -55,28 +53,28 @@ public class JogadorDao {
         
         while(res.next())
         {
-            Jogador jogador = new Jogador();
-            jogador.setLogin(res.getString("login"));
-            jogador.setSenha(res.getString("senha"));
-            jogador.setEmail(res.getString("email"));
-            lista.add(jogador);
+            Pessoa pessoa = new Pessoa();
+            pessoa.setNome(res.getString("nome"));
+            pessoa.setSexo(res.getString("sexo"));
+            pessoa.setCodigo(res.getInt("codigo"));
+            lista.add(pessoa);
         }
         
     } catch (SQLException Ex) {
-        Logger.getLogger(JogadorDao.class.getName()).log(Level.SEVERE, null, Ex);
+        Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, Ex);
     }
     return lista;
     }
     
     
-    public Boolean excluir(Jogador jogador)
+    public Boolean excluir(Pessoa pessoa)
     {
         Boolean retorno;
-        String sql = "DELETE FROM jogador WHERE login = ?";
+        String sql = "DELETE FROM pessoa WHERE codigo = ?";
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try
         {
-        pst.setString(1, jogador.getLogin());
+        pst.setInt(1, pessoa.getCodigo());
         
         pst.executeUpdate();
         retorno = true;
@@ -91,3 +89,5 @@ public class JogadorDao {
 
 
 }
+    
+  

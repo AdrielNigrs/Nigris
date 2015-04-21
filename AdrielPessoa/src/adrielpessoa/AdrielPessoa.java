@@ -5,30 +5,28 @@
  */
 
 package adrielpessoa;
-import javax.swing.JOptionPane;
-import modelo.Pessoa;
+import dao.Conexao;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Adriel
  */
 public class AdrielPessoa {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-     
-        Pessoa pessoa = new Pessoa();
-        
-        pessoa.setNome(JOptionPane.showInputDialog("Informe seu nome: "));
-        pessoa.setCodigo(JOptionPane.showInputDialog("Informe o código: "));
-        pessoa.setSexo(JOptionPane.showInputDialog("Informe o sexo: "));
-                
-        JOptionPane.showMessageDialog(null, "Nome: \n" + pessoa.getNome() + "Codigo: \n" + pessoa.getCodigo() + "Sexo: \n" + pessoa.getSexo());
-        
-        
-                
-        
+   public static void main(String[] args) throws SQLException {
+        inserir();
     }
-    
-}
+    public static void inserir () throws SQLException 
+    {
+        String sql;
+        sql = "INSERT INTO pessoa (nome,sexo)" +
+              "VALUES ('Adriel','Masculino')";
+                
+        PreparedStatement pst
+                = Conexao.getPreparedStatement(sql);
+            pst.executeUpdate();
+                  
+        }
+    } 

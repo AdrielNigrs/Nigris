@@ -5,6 +5,7 @@
  */
 package admin;
 
+import dao.PessoaDao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -14,7 +15,7 @@ import modelo.Pessoa;
  *
  * @author Adriel
  */
-public class PessoaTela extends javax.swing.JFrame {
+public class PessoaManter extends javax.swing.JFrame {
     List <Pessoa> lista;
     private Integer posicao;
     /**
@@ -22,7 +23,7 @@ public class PessoaTela extends javax.swing.JFrame {
      */
     
      
-    public PessoaTela() {
+    public PessoaManter() {
         initComponents();
         lista = new ArrayList<Pessoa>();
         posicao = 0;
@@ -37,6 +38,7 @@ public class PessoaTela extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
         btnProximo = new javax.swing.JButton();
@@ -94,15 +96,13 @@ public class PessoaTela extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(btnPrimeiro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAnterior)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProximo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUltimo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnUltimo))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +126,19 @@ public class PessoaTela extends javax.swing.JFrame {
 
         jLabel4.setText("Sexo:");
 
+        txtCodigo.setEnabled(false);
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+
         btnSelecao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Feminino", "Masculino" }));
+        btnSelecao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecaoActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Navegação"));
 
@@ -163,26 +175,26 @@ public class PessoaTela extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExlcuir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addComponent(btnConsultar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpar)
                     .addComponent(btnExlcuir)
+                    .addComponent(btnLimpar)
                     .addComponent(btnConsultar)
                     .addComponent(btnListar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         btnInserir.setText("Inserir");
@@ -197,52 +209,56 @@ public class PessoaTela extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSelecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnInserir))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                    .addComponent(txtCodigo)
-                                    .addComponent(btnSelecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnInserir)
-                                .addGap(18, 18, 18))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnInserir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(btnSelecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(btnSelecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -257,33 +273,27 @@ public class PessoaTela extends javax.swing.JFrame {
     
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
         
-    btnPrimeiro.setEnabled(true);
-    btnAnterior.setEnabled(false);
-    btnProximo.setEnabled(true);
-    btnUltimo.setEnabled(true);
-    
-        posicao = 0;
-        
-        Pessoa pessoa = lista.get(0);
-        
-        if(lista.size()>0){
-            txtNome.setText(pessoa.getNome());
-            txtCodigo.setText(pessoa.getCodigo());
-            if(pessoa.getSexo().equals("Feminino")){
-                btnSelecao.setSelectedIndex(1);              
-            }else{
-                btnSelecao.setSelectedIndex(2);
-            }
-            if (lista.size() == 1)
-            {
+        btnPrimeiro.setEnabled(true);
+        btnAnterior.setEnabled(false);
+        btnProximo.setEnabled(true);
+        btnUltimo.setEnabled(true);
+        if (lista.size() > 0) {
+            posicao = 0;
+            Pessoa elemento = lista.get(0);
+            txtNome.setText(elemento.getNome());
+            txtCodigo.setText(elemento.getCodigo().toString());
+            btnSelecao.setSelectedItem(elemento.getSexo());
+            ;
+        }
+        if (lista.size() == 1) {
             btnProximo.setEnabled(false);
-            btnAnterior.setEnabled(false);
-            }
-        }else{
+
+        }
+        else{
             JOptionPane.showMessageDialog(null, "Não há nenhuma pessoa cadastrada!!!");
         } 
             
-        
+  
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
@@ -365,43 +375,67 @@ public class PessoaTela extends javax.swing.JFrame {
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         Pessoa pessoa = new Pessoa ();
+        Pessoa obj = new Pessoa();
         boolean deu = false;
         
-        if (txtCodigo.getText().isEmpty() || txtNome.getText().isEmpty() || btnSelecao.getSelectedIndex() == 0 ){
-            JOptionPane.showInputDialog("Todos os campos deverão ser preenchidos.");
-        }else {
-            try {
-                pessoa.setCodigo(txtCodigo.getText());
-                deu = true;
-        } catch (Exception ex){
-                deu = false;
-                JOptionPane.showMessageDialog(null,"É número o código");
+        if (txtNome.getText().isEmpty() || btnSelecao.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
         }
-        }
-        if (deu == true){
-            pessoa.setNome (txtNome.getText());
-            if (btnSelecao.getSelectedItem().equals("Feminino")){
-            pessoa.setSexo ("Feminino");
-            }else{
-                pessoa.setSexo ("Masculino");
+        
+                
+        else{
+            deu = true;
+        } 
+            
+            
+            if (deu == true) {
+            
+            obj.setNome(txtNome.getText());
+            obj.setSexo(btnSelecao.getSelectedItem().toString());
+            
+            
+            
+            try{            
+            PessoaDao dao = new PessoaDao();
+            boolean deucerto = dao.inserir(obj);
+            if(deucerto == true)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Cadastrado com sucesso!");
+                lista = dao.listar();
             }
-            lista.add(pessoa);
+            else
+            {
+                JOptionPane.showMessageDialog(rootPane, "Erro ao Cadastrar");
+            }    
+            }catch(Exception e){}
+            
             Limpar();
-            JOptionPane.showMessageDialog(null,"Cadastro Efetuado com Sucesso");
+            
+            
         }
-
+        
+        
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnExlcuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExlcuirActionPerformed
         
-    if (lista.size() >= 0) {
-             lista.remove(lista.get (posicao));
-             Limpar ();
-             JOptionPane.showMessageDialog (null, "Excluído com Sucesso!");
-         }
+    if (txtCodigo.getText().isEmpty() == false) {
+             
+        PessoaDao dao = new PessoaDao();
+            Boolean deucerto = dao.excluir(lista.get(posicao));
+            if(deucerto == true)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Excluido com suscesso");
+                lista = dao.listar();
+                Limpar();
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "ERRO ao excluir");
+            }
 
     }//GEN-LAST:event_btnExlcuirActionPerformed
-
+    
+    }
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         
     String nome = JOptionPane.showInputDialog ("Digite o nome a ser pesquisado");
@@ -441,6 +475,14 @@ public class PessoaTela extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnListarActionPerformed
 
+    private void btnSelecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSelecaoActionPerformed
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -458,20 +500,21 @@ public class PessoaTela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PessoaTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PessoaManter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PessoaTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PessoaManter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PessoaTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PessoaManter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PessoaTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PessoaManter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PessoaTela().setVisible(true);
+                new PessoaManter().setVisible(true);
             }
         });
     }
@@ -487,6 +530,7 @@ public class PessoaTela extends javax.swing.JFrame {
     private javax.swing.JButton btnProximo;
     private javax.swing.JComboBox btnSelecao;
     private javax.swing.JButton btnUltimo;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

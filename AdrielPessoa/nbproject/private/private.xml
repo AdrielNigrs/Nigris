@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Adriel/Documents/GitHub/Nigris/AdrielPessoa/src/admin/PessoaManter.java</file>
+            <file>file:/C:/Users/Adriel/Documents/GitHub/Nigris/AdrielPessoa/src/modelo/Pessoa.java</file>
+            <file>file:/C:/Users/Adriel/Documents/GitHub/Nigris/AdrielPessoa/src/adrielpessoa/AdrielPessoa.java</file>
+            <file>file:/C:/Users/Adriel/Documents/GitHub/Nigris/AdrielPessoa/src/dao/PessoaDao.java</file>
+            <file>file:/C:/Users/Adriel/Documents/GitHub/Nigris/AdrielPessoa/src/dao/Conexao.java</file>
+        </group>
     </open-files>
 </project-private>

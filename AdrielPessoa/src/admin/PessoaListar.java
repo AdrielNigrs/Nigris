@@ -5,6 +5,7 @@
  */
 package admin;
 
+import dao.PessoaDao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -20,45 +21,21 @@ public class PessoaListar extends javax.swing.JFrame {
      * Creates new form PessoaListar
      */
     public PessoaListar() {
+    
         initComponents();
-        
-        List<Pessoa> lista = new ArrayList<Pessoa>();
-    
-        Pessoa item = new Pessoa();
-        item.setNome("Adriel");
-        item.setCodigo("1");
-        item.setSexo("Masculino");
-        lista.add(item);
-        
-        
-        item = new Pessoa();
-        item.setNome("Andressa");
-        item.setCodigo("2");
-        item.setSexo("Feminino");
-        lista.add(item);
-        
-        
-        item = new Pessoa();
-        item.setNome("Jesus");
-        item.setCodigo("33");
-        item.setSexo("Masculino");
-        lista.add(item);
-    
+        PessoaDao dao = new PessoaDao();
+        List<Pessoa> lista = dao.listar();
         
         DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
-        Object [] linha = new Object [modelo.getColumnCount()];
         
-        for (Pessoa pess: lista){
-            linha [0] = pess.getCodigo();
-            linha [1] = pess.getNome();
-            linha [2] = pess.getSexo();
-            
+        Object[] linha = new Object[modelo.getColumnCount()];
+
+        for (Pessoa jog : lista) {
+            linha[0] = jog.getNome();
+            linha[1] = jog.getSexo();
             modelo.addRow(linha);
-        
         }
-        
-        
-        
+     
     }
     
 
@@ -156,7 +133,7 @@ public class PessoaListar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerenciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarActionPerformed
-        PessoaTela tela = new PessoaTela();
+        PessoaManter tela = new PessoaManter();
         tela.setVisible(true);
         
     }//GEN-LAST:event_btnGerenciarActionPerformed

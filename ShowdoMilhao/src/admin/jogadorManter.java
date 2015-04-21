@@ -223,6 +223,12 @@ public class jogadorManter extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Login:");
 
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Senha:");
 
@@ -247,7 +253,7 @@ public class jogadorManter extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                     .addComponent(txtEmail)
                     .addComponent(txtSenha))
                 .addContainerGap())
@@ -278,9 +284,9 @@ public class jogadorManter extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(92, 92, 92)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -443,11 +449,16 @@ public class jogadorManter extends javax.swing.JFrame {
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
         if (txtLogin.getText().isEmpty() == false) {
-            if (lista.size() >= 0) {
-                lista.remove(lista.get(posicao));
+            JogadorDao dao = new JogadorDao();
+            Boolean deucerto = dao.excluir(lista.get(posicao));
+            if(deucerto == true)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Excluido com suscesso");
+                lista = dao.listar();
                 Limpar();
-                posicao = 0;
-                JOptionPane.showMessageDialog(null, "Excluído!");
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "ERRO ao excluir");
             }
         }
     }//GEN-LAST:event_botaoExcluirActionPerformed
@@ -491,6 +502,10 @@ public class jogadorManter extends javax.swing.JFrame {
         home.setVisible(true);
         dispose();
     }//GEN-LAST:event_botaoVoltar1ActionPerformed
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaActionPerformed
 
     public void Limpar() {
         txtLogin.setText("");
