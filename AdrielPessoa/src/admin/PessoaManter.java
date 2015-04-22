@@ -17,7 +17,7 @@ import modelo.Pessoa;
  */
 public class PessoaManter extends javax.swing.JFrame {
     List <Pessoa> lista;
-    private Integer posicao;
+    Integer posicao, ultimo;
     /**
      * Creates new form PessoaTela
      */
@@ -25,8 +25,11 @@ public class PessoaManter extends javax.swing.JFrame {
      
     public PessoaManter() {
         initComponents();
-        lista = new ArrayList<Pessoa>();
+        PessoaDao dao = new PessoaDao();
+        lista = dao.listar();
         posicao = 0;
+        
+        
     }
 
     /**
@@ -264,15 +267,14 @@ public class PessoaManter extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void Limpar(){
-    txtCodigo.setText(null);
-    txtNome.setText(null);
+    txtCodigo.setText("");
+    txtNome.setText("");
     btnSelecao.setSelectedIndex(0);
     
     }
     
     
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
-        
         btnPrimeiro.setEnabled(true);
         btnAnterior.setEnabled(false);
         btnProximo.setEnabled(true);
@@ -283,17 +285,13 @@ public class PessoaManter extends javax.swing.JFrame {
             txtNome.setText(elemento.getNome());
             txtCodigo.setText(elemento.getCodigo().toString());
             btnSelecao.setSelectedItem(elemento.getSexo());
-            ;
+            
         }
         if (lista.size() == 1) {
             btnProximo.setEnabled(false);
 
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Não há nenhuma pessoa cadastrada!!!");
-        } 
-            
-  
+        
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
@@ -314,10 +312,7 @@ public class PessoaManter extends javax.swing.JFrame {
                 btnSelecao.setSelectedIndex(2);
             }
         }
-        else{
-            JOptionPane.showMessageDialog(null, " Não há nenhuma pessoa cadastrada!!!");
-        }
-       
+        
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -432,7 +427,8 @@ public class PessoaManter extends javax.swing.JFrame {
             else{
                 JOptionPane.showMessageDialog(rootPane, "ERRO ao excluir");
             }
-
+            
+            
     }//GEN-LAST:event_btnExlcuirActionPerformed
     
     }

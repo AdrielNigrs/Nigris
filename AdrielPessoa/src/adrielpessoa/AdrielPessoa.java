@@ -21,7 +21,7 @@ public class AdrielPessoa {
     public static void inserir () throws SQLException 
     {
         String sql;
-        sql = "INSERT INTO pessoa (nome,sexo)" +
+        sql = "INSERT INTO pessoa (NOME,SEXO)" +
               "VALUES ('Adriel','Masculino')";
                 
         PreparedStatement pst

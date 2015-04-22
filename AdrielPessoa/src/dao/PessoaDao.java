@@ -23,7 +23,7 @@ public class PessoaDao {
     public Boolean inserir(Pessoa pessoa)
     {
         Boolean retorno;
-        String sql = "INSERT INTO pessoa(nome,sexo)" + "VALUES (?,?)";
+        String sql = "INSERT INTO PESSOA(NOME,SEXO)" + "VALUES (?,?)";
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try
         {
@@ -45,7 +45,7 @@ public class PessoaDao {
     public List<Pessoa> listar()
     {
     List<Pessoa> lista = new ArrayList<Pessoa>();
-    String sql = "SELECT * FROM pessoa";
+    String sql = "SELECT * FROM PESSOA";
     PreparedStatement pst = Conexao.getPreparedStatement(sql);
     
     try{
@@ -54,9 +54,9 @@ public class PessoaDao {
         while(res.next())
         {
             Pessoa pessoa = new Pessoa();
-            pessoa.setNome(res.getString("nome"));
-            pessoa.setSexo(res.getString("sexo"));
-            pessoa.setCodigo(res.getInt("codigo"));
+            pessoa.setNome(res.getString("NOME"));
+            pessoa.setSexo(res.getString("SEXO"));
+            pessoa.setCodigo(res.getInt("CODIGO"));
             lista.add(pessoa);
         }
         

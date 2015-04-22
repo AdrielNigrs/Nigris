@@ -30,9 +30,9 @@ public class PessoaListar extends javax.swing.JFrame {
         
         Object[] linha = new Object[modelo.getColumnCount()];
 
-        for (Pessoa jog : lista) {
-            linha[0] = jog.getNome();
-            linha[1] = jog.getSexo();
+        for (Pessoa pes : lista) {
+            linha[0] = pes.getNome();
+            linha[1] = pes.getSexo();
             modelo.addRow(linha);
         }
      
@@ -135,7 +135,7 @@ public class PessoaListar extends javax.swing.JFrame {
     private void btnGerenciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarActionPerformed
         PessoaManter tela = new PessoaManter();
         tela.setVisible(true);
-        
+        dispose();
     }//GEN-LAST:event_btnGerenciarActionPerformed
 
     /**
