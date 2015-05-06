@@ -465,13 +465,20 @@ public class perguntaManter extends javax.swing.JFrame {
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
         if (txtPergunta.getText().isEmpty() == false) {
-            if (lista.size() >= 0) {
-                lista.remove(lista.get(posicao));
+            PerguntaDao dao = new PerguntaDao();
+            Boolean deucerto = dao.excluir(lista.get(posicao));
+            if(deucerto == true)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Excluido com suscesso");
+                lista = dao.listar();
                 Limpar();
-                posicao = 0;
-                JOptionPane.showMessageDialog(null, "Excluído!");
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "ERRO ao excluir");
             }
         }
+        
+             
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
     private void botaoConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultarActionPerformed
@@ -522,7 +529,7 @@ public class perguntaManter extends javax.swing.JFrame {
             txtB.setText(elemento.getB());
             txtC.setText(elemento.getC());
             txtD.setText(elemento.getD());
-            cbxNivel.setSelectedItem(elemento.getNivel());
+            cbxNivel.setSelectedItem(elemento.getNivel().toString());
             cbxResposta.setSelectedItem(elemento.getCerta());
             txtID.setText(elemento.getId().toString());
         }

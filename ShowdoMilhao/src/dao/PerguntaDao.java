@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Jogador;
 import modelo.Pergunta;
 
 /**
@@ -75,7 +76,29 @@ public class PerguntaDao {
     }
     return lista;
     }
-   
+     
+     
+    public Boolean excluir(Pergunta pergunta)
+    {
+        Boolean retorno;
+        String sql = "DELETE FROM pergunta WHERE enunciado = ?";
+        PreparedStatement pst = Conexao.getPreparedStatement(sql);
+        try
+        {
+        pst.setString(1, pergunta.getEnunciado());
+        
+        pst.executeUpdate();
+        retorno = true;
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            retorno = false;
+        }
+    return retorno;
+    }
+
+
     
     }
 
